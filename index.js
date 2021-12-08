@@ -4,7 +4,9 @@ const { Telegraf } = require('telegraf');
 const covidApi = require('covid19-api');
 const COUNTRIES_LIST = require('./const')
 
-const bot = new Telegraf('5066002319:AAGTWsbfA9zlXtrw587L9BafvvHn_ff8YT4')
+const TOKEN = '5066002319:AAGTWsbfA9zlXtrw587L9BafvvHn_ff8YT4';
+const CHAT_ID = '466020701';
+const bot = new Telegraf(TOKEN)
 
 bot.start( ctx => ctx.reply(`
     Привет ${ctx.from.first_name}!
@@ -38,5 +40,5 @@ async function sleep(ms) {
     });
 }
 
-sleep(3000).then(a => bot.telegram.sendMessage(466020701, 'Hello World test'));
+sleep(3000).then(a => bot.telegram.sendMessage(CHAT_ID, 'Hello World test'));
 
