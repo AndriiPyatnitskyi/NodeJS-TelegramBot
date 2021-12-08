@@ -3,6 +3,7 @@ import express, {Express} from 'express';
 import morgan from 'morgan';
 import accountRouter from './routes/accounts';
 import tokenRouter from './routes/tokens';
+import telegramBotRouter from './routes/telegrabBots';
 import swaggerUi from 'swagger-ui-express';
 const mongoose = require("mongoose");
 
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 /** Routes */
 app.use('/', accountRouter);
 app.use('/', tokenRouter);
+app.use('/', telegramBotRouter);
 
 /** Error handling */
 app.use((req, res, next) => {
