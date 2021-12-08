@@ -1,3 +1,6 @@
+// Run DB - docker run --name TelegramBotDemoDB -d -it -p 27017:27017 mongo:4.4.10-rc0-focal
+
+
 import http from 'http';
 import express, {Express} from 'express';
 import morgan from 'morgan';
@@ -5,6 +8,7 @@ import accountRouter from './routes/accounts';
 import tokenRouter from './routes/tokens';
 import telegramBotRouter from './routes/telegramBots';
 import swaggerUi from 'swagger-ui-express';
+import logRouter from "./routes/logs";
 const mongoose = require("mongoose");
 
 const swaggerDocument = require('./swagger.json');
@@ -52,6 +56,7 @@ app.use((req, res, next) => {
 app.use('/', accountRouter);
 app.use('/', tokenRouter);
 app.use('/', telegramBotRouter);
+app.use('/', logRouter);
 
 /** Error handling */
 app.use((req, res, next) => {
