@@ -3,7 +3,7 @@ import express, {Express} from 'express';
 import morgan from 'morgan';
 import accountRouter from './routes/accounts';
 import tokenRouter from './routes/tokens';
-import telegramBotRouter from './routes/telegrabBots';
+import telegramBotRouter from './routes/telegramBots';
 import swaggerUi from 'swagger-ui-express';
 const mongoose = require("mongoose");
 
