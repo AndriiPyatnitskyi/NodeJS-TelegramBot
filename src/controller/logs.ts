@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {eventEmitter} from '../server'
+import {LogLevel} from "../enum/logLevel";
 
 const pino = require("pino");
 
@@ -9,32 +10,14 @@ const logger = pino({
     },
 })
 
-
-enum LogLevel {
-    FATAL = "FATAL",
-    ERROR = "ERROR",
-    WARN = "WARN",
-    INFO = "INFO",
-    DEBUG = "DEBUG",
-    TRACE = "TRACE"
-}
-
-
-
-
 //todo: add swagger
 const createLog: any = async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400);
 
     const logLevel: String = req.body.logLevel;
     const logMessage: String = req.body.logMessage;
-
+    printLog(logLevel, logMessage);
     eventEmitter.emit(logLevel.toString(), logMessage);
-// console.log("-------------------");
-    // logger.error(logMessage);
-    // let mapGet = logLevelStrategy.get(<LogLevel> logLevel);
-    // console.log(mapGet);
-    // mapGet(logMessage);
     res.send(logMessage);
 };
 
