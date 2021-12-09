@@ -8,19 +8,9 @@ const bot = new Telegraf(TOKEN);
 
 export default (eventEmitter: EventEmitter) => {
 
-    // enum LogLevel {
-    //     FATAL = "FATAL",
-    //     ERROR = "ERROR",
-    //     WARN = "WARN",
-    //     INFO = "INFO",
-    //     DEBUG = "DEBUG",
-    //     TRACE = "TRACE"
-    // }
-
     Object.keys(LogLevel)
         .forEach(loglevel =>
         {
-            console.log(loglevel);
             eventEmitter.on(loglevel.toString(), (logMessage) => bot.telegram.sendMessage(CHAT_ID, `
             Log level: ${loglevel}
             Message: ${logMessage}`

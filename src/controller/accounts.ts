@@ -6,16 +6,19 @@ import {Role} from "../dto/account";
 const jwt = require("jsonwebtoken");
 const secretKey = "mySecretKey";
 // const models = require("../server");
-const Account = require("../server");
+import {Account} from '../server'
+//
+// const {Account} = require("../server");
 const filePath = "./accounts.json";
 
 const getAccounts: any = async (req: Request, res: Response) => {
-    let find = await Account.default.find();
+    console.log(Account);
+    let find = await Account.find();
     res.send(find);
 };
 
 const getAccountById: any = async (req: Request, res: Response) => {
-    const result = await Account.default.findById(req.params.id);
+    const result = await Account.findById(req.params.id);
 
     if (result) {
         res.send(result);
@@ -40,7 +43,7 @@ const createAccount: any = async (req: Request, res: Response) => {
         }
     );
 
-    const result = await Account.default.create({name: accountName, token: token, role: role});
+    const result = await Account.create({name: accountName, token: token, role: role});
 
     res.send(result);
 };
@@ -49,8 +52,8 @@ const updateAccount: any = async (req: Request, res: Response) => {
 
     if (!req.body) return res.sendStatus(400);
 
-    await Account.default.findByIdAndUpdate(req.params.id, {name : req.body.name})
-    const result = await Account.default.findById(req.params.id);
+    await Account.findByIdAndUpdate(req.params.id, {name : req.body.name})
+    const result = await Account.findById(req.params.id);
 
     if (result) {
         res.send(result);
@@ -60,7 +63,7 @@ const updateAccount: any = async (req: Request, res: Response) => {
 };
 
 const deleteAccount: any = async (req: Request, res: Response) => {
-    let result = await Account.default.findByIdAndRemove(req.params.id);
+    let result = await Account.findByIdAndRemove(req.params.id);
 
     if (result) {
         res.sendStatus(204);
@@ -70,7 +73,7 @@ const deleteAccount: any = async (req: Request, res: Response) => {
 };
 
 const getAccountTokensByAccountId: any = async (req: Request, res: Response) => {
-    const result = await Account.default.findById(req.params.id);
+    const result = await Account.findById(req.params.id);
 
     if (result) {
         res.send(result.token);
@@ -82,13 +85,13 @@ const getAccountTokensByAccountId: any = async (req: Request, res: Response) => 
 const createAccountToken: any = async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400);
 
-    const account = await Account.default.findById(req.params.id);
+    const account = await Account.findById(req.params.id);
 
     if (!account) {
         res.status(404).send(req.params.id);
     }
 
-    await Account.default.findByIdAndUpdate(req.params.id,
+    await Account.findByIdAndUpdate(req.params.id,
         {token: jwt.sign(
                 {account_name: account.name},
                 secretKey,
@@ -97,7 +100,7 @@ const createAccountToken: any = async (req: Request, res: Response) => {
                 }
             )});
 
-    let result = await Account.default.findById(req.params.id, 'token');
+    let result = await Account.findById(req.params.id, 'token');
 
     if (result) {
         res.send(result);
@@ -112,7 +115,7 @@ const updateAccountToken: any = async (req: Request, res: Response) => {
     const accountSourceToken: String = req.body.sourceToken;
     const accountTargetToken: String = req.body.targetToken;
 
-    const account = await Account.default.findById(req.params.id);
+    const account = await Account.findById(req.params.id);
 
     if (!account) {
         res.status(404).send(req.params.id);
@@ -123,12 +126,12 @@ const updateAccountToken: any = async (req: Request, res: Response) => {
     }
 
 
-    await Account.default.findByIdAndUpdate(req.params.id,
+    await Account.findByIdAndUpdate(req.params.id,
         {
             token: accountTargetToken
         });
 
-    let result = await Account.default.findById(req.params.id, 'token');
+    let result = await Account.findById(req.params.id, 'token');
 
     if (result) {
         res.send(result);
@@ -140,18 +143,18 @@ const updateAccountToken: any = async (req: Request, res: Response) => {
 const deleteAccountToken: any = async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400);
 
-    const account = await Account.default.findById(req.params.id);
+    const account = await Account.findById(req.params.id);
 
     if (!account) {
         res.status(404).send(req.params.id);
     }
 
-    await Account.default.findByIdAndUpdate(req.params.id,
+    await Account.findByIdAndUpdate(req.params.id,
         {
             token: ''
         });
 
-    let result = await Account.default.findById(req.params.id);
+    let result = await Account.findById(req.params.id);
 
     if (result) {
         res.send(result);

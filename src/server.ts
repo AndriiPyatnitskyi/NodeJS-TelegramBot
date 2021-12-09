@@ -80,4 +80,4 @@ const httpServer = http.createServer(app);
 const PORT: any = process.env.PORT ?? 6062;
 httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
 
-export { Account, eventEmitter}
+export { eventEmitter, Account}
