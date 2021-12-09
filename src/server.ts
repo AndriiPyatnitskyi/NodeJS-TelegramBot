@@ -4,12 +4,18 @@
 import http from 'http';
 import express, {Express} from 'express';
 import morgan from 'morgan';
+
 import accountRouter from './routes/accounts';
 import tokenRouter from './routes/tokens';
 import telegramBotRouter from './routes/telegramBots';
-import swaggerUi from 'swagger-ui-express';
 import logRouter from "./routes/logs";
+
+import swaggerUi from 'swagger-ui-express';
 const mongoose = require("mongoose");
+import botInit from './eventListener/telegramBot';
+import {EventEmitter} from "events";
+const eventEmitter = new EventEmitter();
+
 
 const swaggerDocument = require('./swagger.json');
 const app: Express = express();
@@ -66,9 +72,12 @@ app.use((req, res, next) => {
     });
 });
 
+/** Register EventListeners */
+botInit(eventEmitter);
+
 /** Server */
 const httpServer = http.createServer(app);
 const PORT: any = process.env.PORT ?? 6062;
 httpServer.listen(PORT, () => console.log(`The server is running on port ${PORT}`));
 
-export { Account as default }
+export { Account, eventEmitter}

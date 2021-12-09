@@ -2,7 +2,6 @@
   "name": "telegrambotdemo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "rm -rf build/ && prettier --write src/ && tsc",
@@ -23,6 +22,8 @@
     "pino": "^7.5.1",
     "pino-pretty": "^7.2.0",
     "sequelize": "^6.9.0",
+    "socket.io": "^4.3.1",
+    "socket.io-client": "^4.3.2",
     "swagger-ui-express": "^4.1.6",
     "telegraf": "^3.38.0",
     "ts-node": "^10.4.0",
