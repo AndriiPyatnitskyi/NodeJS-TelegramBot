@@ -9,6 +9,7 @@ const secretKey = "mySecretKey";
 const Account = require("../server");
 const filePath = "./accounts.json";
 
+// todo add swagger
 const getTelegramBotLink: any = async (req: Request, res: Response) => {
     res.send("https://t.me/NodeJsDemoLogConsumerBot");
 };

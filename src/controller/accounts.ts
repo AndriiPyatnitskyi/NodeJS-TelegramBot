@@ -1,16 +1,10 @@
 import {Request, Response} from 'express';
-import * as fs from 'fs';
 import {Role} from "../dto/account";
-// import {Role, Account} from "../dto/account";
-
 const jwt = require("jsonwebtoken");
 const secretKey = "mySecretKey";
-// const models = require("../server");
 import {Account} from '../server'
-//
-// const {Account} = require("../server");
-const filePath = "./accounts.json";
 
+// todo test
 const getAccounts: any = async (req: Request, res: Response) => {
     console.log(Account);
     let find = await Account.find();
