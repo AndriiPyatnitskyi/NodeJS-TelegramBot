@@ -1,5 +1,4 @@
 import {Request, Response} from 'express';
-import { EventEmitter } from 'events';
 import {eventEmitter} from '../server'
 
 const pino = require("pino");
@@ -10,19 +9,50 @@ const logger = pino({
     },
 })
 
-// const eventEmitter = new EventEmitter();
+
+enum LogLevel {
+    FATAL = "FATAL",
+    ERROR = "ERROR",
+    WARN = "WARN",
+    INFO = "INFO",
+    DEBUG = "DEBUG",
+    TRACE = "TRACE"
+}
+
+
+
 
 //todo: add swagger
 const createLog: any = async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400);
 
-
+    const logLevel: String = req.body.logLevel;
     const logMessage: String = req.body.logMessage;
-    eventEmitter.emit('myEvent', logMessage);
 
-    logger.error(logMessage);
+    eventEmitter.emit(logLevel.toString(), logMessage);
+// console.log("-------------------");
+    // logger.error(logMessage);
+    // let mapGet = logLevelStrategy.get(<LogLevel> logLevel);
+    // console.log(mapGet);
+    // mapGet(logMessage);
     res.send(logMessage);
 };
+
+const printLog: any = (logLevel: LogLevel, logMessage: String) => {
+    if (logLevel === LogLevel.FATAL) {
+        logger.fatal(logMessage);
+    } else if (logLevel === LogLevel.ERROR) {
+        logger.error(logMessage);
+    } else if (logLevel === LogLevel.WARN) {
+        logger.warn(logMessage);
+    } else if (logLevel === LogLevel.INFO) {
+        logger.info(logMessage);
+    } else if (logLevel === LogLevel.DEBUG) {
+        logger.debug(logMessage);
+    } else if (logLevel === LogLevel.TRACE) {
+        logger.trace(logMessage);
+    }
+}
 
 export default { createLog, eventEmitter };
 
