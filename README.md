@@ -2,9 +2,9 @@
 
 This is the final project of NodeJS backend development course provided by https://robotdreams.cc/
 
-The main idea of this project is consume and display logs in telegram bot, thah ware produced by some system. 
+The main idea of this project is consume by event listener and display logs in telegram bot, thah ware produced by some system. 
 
-Producing logs emulated by sending them via http request, for example postman.
+Producing logs by system emulated by sending them via http request, for example postman.
 
 Only authorized users or admins can send log message requests.
 
