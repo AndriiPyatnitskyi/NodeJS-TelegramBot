@@ -6,6 +6,6 @@ const permit = require("../middleware/auth");
 const { validator } = require('express-fastest-validator');
 const logRouter = express.Router();
 
-logRouter.post('/api/logs', validator(logLevelSchema), permit([Role.ANONYMOUS, Role.USER, Role.ADMIN]), controller.createLog);
+logRouter.post('/api/logs', validator(logLevelSchema), permit([Role.USER, Role.ADMIN]), controller.createLog);
 
 export default logRouter;

@@ -16,6 +16,9 @@
       "name": "Account"
     },
     {
+      "name": "TelegramBot"
+    },
+    {
       "name": "Log"
     }
   ],
@@ -383,6 +386,31 @@
         }
       }
     },
+    "/telegramBots": {
+      "get": {
+        "tags": [
+          "TelegramBot"
+        ],
+        "summary": "Get TelegramBot connection url",
+        "description": "",
+        "operationId": "getTelegramBotLink",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "example": "https://t.me/NodeJsDemoLogConsumerBot"
+            }
+          }
+        }
+      }
+    },
     "/logs": {
       "post": {
         "tags": [
@@ -415,12 +443,6 @@
               "type": "string",
               "example": "some log message"
             }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Account not found"
           }
         }
       }
