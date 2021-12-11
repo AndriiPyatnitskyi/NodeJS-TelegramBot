@@ -2,7 +2,6 @@ import Sequelize from "sequelize";
 
 module.exports = (sequelize: any) => {
     const AccountModel = sequelize.define('accounts', {
-        // attributes
         name: {
             type: Sequelize.STRING
         },
@@ -13,7 +12,6 @@ module.exports = (sequelize: any) => {
             type: Sequelize.STRING
         },
     }, {
-// options
     })
     return AccountModel;
 };

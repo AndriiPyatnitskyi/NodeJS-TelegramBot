@@ -1,4 +1,3 @@
-//https://t.me/NodeJsDemoLogConsumerBot
 import {EventEmitter} from "events";
 import {LogLevel} from "../enum/logLevel";
 const { Telegraf } = require('telegraf');
@@ -22,7 +21,6 @@ export default (eventEmitter: EventEmitter) => {
     Hi ${ctx.from.first_name}!
     This demo bot provides logs"`
     ));
-
 
     bot.launch();
 }

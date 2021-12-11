@@ -10,7 +10,6 @@ const logger = pino({
     },
 })
 
-//todo: add swagger
 const createLog: any = async (req: Request, res: Response) => {
     if (!req.body) return res.sendStatus(400);
 
