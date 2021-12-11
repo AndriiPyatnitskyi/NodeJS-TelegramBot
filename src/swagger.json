@@ -16,7 +16,7 @@
       "name": "Account"
     },
     {
-      "name": "Token"
+      "name": "Log"
     }
   ],
   "schemes": [
@@ -75,7 +75,7 @@
             "description": "Account object that needs to be added to the store",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Account"
+              "$ref": "#/definitions/AccountRequest"
             }
           }
         ],
@@ -223,7 +223,7 @@
     "/accounts/{id}/tokens": {
       "get": {
         "tags": [
-          "Token"
+          "Account"
         ],
         "summary": "Get account tokens",
         "description": "",
@@ -261,7 +261,7 @@
       },
       "post": {
         "tags": [
-          "Token"
+          "Account"
         ],
         "summary": "Generate account token",
         "description": "",
@@ -299,7 +299,7 @@
       },
       "put": {
         "tags": [
-          "Token"
+          "Account"
         ],
         "summary": "Update account token",
         "description": "",
@@ -346,7 +346,7 @@
       },
       "delete": {
         "tags": [
-          "Token"
+          "Account"
         ],
         "summary": "Delete account token",
         "description": "",
@@ -382,9 +382,67 @@
           }
         }
       }
+    },
+    "/logs": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "summary": "Post log",
+        "description": "",
+        "operationId": "createLog",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Log object that needs to be send to consumer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogMessage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "example": "some log message"
+            }
+          },
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Account not found"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AccountRequest": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "someName"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["ADMIN", "USER"]
+        }
+      }
+    },
     "Account": {
       "type": "object",
       "required": [
@@ -402,6 +460,23 @@
         "token": {
           "type": "string",
           "example": "someToken"
+        }
+      }
+    },
+    "LogMessage": {
+      "type": "object",
+      "required": [
+        "logMessage",
+        "logLevel"
+      ],
+      "properties": {
+        "logMessage": {
+          "type": "string",
+          "example": "someLog"
+        },
+        "logLevel": {
+          "type": "string",
+          "enum": ["FATAL", "ERROR", "WARN", "INFO", "DEBUG", "TRACE"]
         }
       }
     },

@@ -4,7 +4,6 @@ const jwt = require("jsonwebtoken");
 const secretKey = "mySecretKey";
 import {Account} from '../server'
 
-// todo test
 const getAccounts: any = async (req: Request, res: Response) => {
     console.log(Account);
     let find = await Account.find();

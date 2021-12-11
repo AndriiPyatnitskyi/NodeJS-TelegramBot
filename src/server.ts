@@ -6,7 +6,6 @@ import express, {Express} from 'express';
 import morgan from 'morgan';
 
 import accountRouter from './routes/accounts';
-import tokenRouter from './routes/tokens';
 import telegramBotRouter from './routes/telegramBots';
 import logRouter from "./routes/logs";
 
@@ -60,7 +59,6 @@ app.use((req, res, next) => {
 
 /** Routes */
 app.use('/', accountRouter);
-app.use('/', tokenRouter);
 app.use('/', telegramBotRouter);
 app.use('/', logRouter);
 
