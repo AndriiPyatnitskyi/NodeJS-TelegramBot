@@ -1,8 +1,9 @@
 import express from 'express';
 import controller from '../controller/accounts';
 import {Role} from "../dto/account";
-const { validator } = require('express-fastest-validator');
 import accountSchemaValidator from "../validator/validator";
+
+const { validator } = require('express-fastest-validator');
 
 const permit = require("../middleware/auth");
 const accountRouter = express.Router();
