@@ -14,8 +14,7 @@ accountRouter.post('/api/accounts', validator(accountSchemaValidator), permit([ 
 accountRouter.put('/api/accounts/:id', validator(accountSchemaValidator), permit([ Role.USER, Role.ADMIN]), controller.updateAccount);
 accountRouter.delete('/api/accounts/:id', permit([Role.ADMIN]), controller.deleteAccount);
 accountRouter.get('/api/accounts/:id/tokens', permit([ Role.USER, Role.ADMIN]), controller.getAccountTokensByAccountId);
-accountRouter.post('/api/accounts/:id/tokens', permit([ Role.USER, Role.ADMIN]), controller.createAccountToken);
-accountRouter.put('/api/accounts/:id/tokens', permit([ Role.USER, Role.ADMIN]), controller.updateAccountToken);
+accountRouter.post('/api/accounts/:id/tokens', permit([ Role.ADMIN]), controller.createAccountToken);
 accountRouter.delete('/api/accounts/:id/tokens', permit([Role.ADMIN]), controller.deleteAccountToken);
 
 export default accountRouter;
